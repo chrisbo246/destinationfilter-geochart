@@ -1,0 +1,55 @@
+@import "variables";
+
+html,body,
+.container-fluid,
+.container-fluid > .row-fluid,
+.container-fluid > .row-fluid > #visualization {
+height:100%!important;
+//background: @body-bg!important;
+}
+
+#content{
+padding:0!important;
+}
+
+@media (min-width: 1200px) {
+
+/*#visualization {
+position: fixed;
+}*/
+
+}
+
+/*#visualization {
+max-width:100%;
+overflow:hidden;
+}*/
+
+/*.widget input,.widget select,.widget textarea{
+max-width:100%;
+}*/
+
+#sidebar{
+/*font-size:70%;
+line-height:70%;*/
+height:100%!important;
+overflow:scroll-y;
+//padding:0;
+}
+
+.widget{
+word-wrap: break-word;
+}
+
+.hidden,
+dt.hidden + dd{
+display:none;
+}
+
+.dl-horizontal dd {
+margin-left: 33%!important;
+}
+.dl-horizontal dt {
+width: 30%!important;
+}
+

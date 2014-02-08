@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Country map</title>
+  <meta name="description" content="Select the best travel destination.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-translate-customization" content="565357c6ef107c35-93b4a073afdfd9a2-geddc7ea63978d4ef-13"></meta>
+<!---->
+  <link rel="stylesheet/less" type="text/css" href="./less/style.less" />
+  <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.0.3/css/bootstrap.min.css" />
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/south-street/jquery-ui.min.css" rel="stylesheet" />
+
+  <style>
+  .ui-sortable { list-style-type: none; margin: 0; padding: 0; }
+  .ui-sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; }
+  .ui-sortable li span { position: absolute; margin-left: -1.3em; }
+  .ui-sortable li:not(.disabled) { cursor: pointer; }
+  .ui-sortable li.disabled { opacity:.5; }
+  .ui-dialog{opacity:.8;transition: opacity .5s;}
+  .ui-dialog:hover{opacity:1;transition: opacity .5s;}
+  .ui-tabs-nav .ui-icon {display: inline-block;}
+  /*.ui-tabs-panel{max-height:60%;overflow:scroll;}*/
+  #google_translate_element{position:absolute;top:0;right:0;}
+  </style>
+
+  <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script type="text/javascript" src="//www.google.com/jsapi"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/less/1.5.1/less.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/prefixfree/1.0.7/prefixfree.jquery.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.cookie/1.4.0/jquery.cookie.min.js"></script>
+  <script type="text/javascript" src="assets/js/sayt.min.jquery.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.arrayUtilities.min.js"></script>
+  <script type="text/javascript" src="js/geochart.js"></script>
+  <script type="text/javascript">
+  </script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div id="sidebar" class="col-md-4">
+    <div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, multilanguagePage: true, gaTrack: true, gaId: 'UA-39818759-2'}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      <h1>Destination finder<small> alpha</small></h1>
+      <div id="tabs">
+        <ul>
+          <li><a href="#home-tab"><span class="ui-icon ui-icon-home"></span></a></li>
+          <li><a href="#profile-tab"><span class="ui-icon ui-icon-person"></span>My profile</a></li>
+          <li><a href="#priorities-tab"><span class="ui-icon ui-icon-check"></span>Priorities</a></li>
+          <li><a href="#results-tab"><span class="ui-icon ui-icon-flag"></span>Ranking</a></li>
+        </ul>
+        <div id="home-tab" class="widget">
+          <form id="home_form" class="form-horizontal" role="form">
+            <h2>Getting started</h2>
+            <ol>
+            <li>
+            <p>Select your actual country to pre fill your profile. Note that your previous profile will be replaced.</p>
+            <div class="form-group">
+              <label for="country_code" title="The place you use to live." class="col-sm-4 control-label">My country</label>
+              <div class="col-sm-8"><select id="country_code" name="country_code" class="form-control" placeholder=".input-block-level"></select></div>
+            </div>
+            </li>
+            <li>Go to "My Profile" tab and verify that the values ​​are correct.</li>
+            <li>Go to "My priorities" tab and reorder values depending on your priorities.</li>
+            <li>Go to "Map" tab and click "refresh map" button to view the best destinations.</li>
+            </ol>
+          </form> 
+          <h2>Map control</h2>
+          <ul>
+            <li>Click an area to show details.</li>
+            <li>Double-click area to zoom in.</li>
+            <li>Right-click map and select "return" to zoom out.</li>
+          </ul>          
+        </div>
+        <div id="profile-tab" class="widget">
+          <form id="profile_form" class="form-horizontal" role="form">
+            <p class="text-info">Adjust values matching your current situation.</p>
+            <div class="form-group">
+              <label for="passport_country_code" title="Origin country of your passport and other official ID documents." class="col-sm-4 control-label">Nationality</label>
+              <div class="col-sm-8"><select id="passport_country_code" name="passport_country_code" class="form-control" placeholder=".input-block-level"></select></div>
+            </div>
+            <div class="form-group">
+              <label for="language_code" title="Your native and other languages you could eventually use. Hold down the control Ctrl (Windows) / Command (Mac) button to select multiple options." class="col-sm-4 control-label">Languages</label>
+              <div class="col-sm-8"><select multiple id="language_code" name="language_code" class="form-control" placeholder=".input-block-level"></select></div>
+            </div>
+            <div class="form-group">
+              <label for="currency_code" title="Your money." class="col-sm-4 control-label">Currency</label>
+              <div class="col-sm-8"><select id="currency_code" name="currency_code" class="form-control" placeholder=".input-block-level"></select></div>
+            </div>
+            <div class="form-group">
+              <label for="ac_plug" class="col-sm-4 control-label" title="http://en.wikipedia.org/wiki/AC_power_plugs_and_sockets">AC Plug</label>
+              <div class="col-sm-8"><select id="ac_plug" name="ac_plug" class="form-control" placeholder=".input-block-level"></select></div>
+            </div>
+            <div class="form-group">
+              <label for="ac_plug" class="col-sm-4 control-label">AC current</label>
+              <div>
+              <div class="col-xs-4 form-inline"><select id="ac_voltage" name="ac_voltage" class="form-control" placeholder=".col-xs-2"></select><span>V</span></div>
+              <div class="col-xs-4 form-inline"><select id="ac_frequency" name="ac_frequency" class="form-control" placeholder=".col-xs-2"><option value="50">50</option><option value="60">60</option></select><span>Hz</span></div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div id="priorities-tab" class="widget">
+          <div>
+            <p class="text-info">Reorder parameters depending on your priority (high to low). Countries should...</p>
+            <ul id="priorities">
+              <li id="language_priority" class="ui-state-default" title="Most people should know your language.">Talk one of my languages</li>
+              <li id="secondary_language_priority" class="ui-state-default" title="Some people may know your language in few local provinces.">Possibly know one of my languages</li>
+              <li id="visa-free_priority" class="ui-state-default" title="Some countries are accessible with just a passport, for a few weeks or more depending on your origin. This may vary so check the country embassy to confirme.">Is accessible without VISA</li>
+              <li id="neighbour_priority" class="ui-state-default" title="The country touch your so you can go quickly by car or train.">Is neighbour</li>
+              <li id="currency_priority" class="ui-state-default" title="You'll doesn't have to take care about change rate. Just ensure that Local ATMs accept your credit card.">Use the same currency</li>
+              <li id="ac_plug_priority" class="ui-state-default" title="You may need an adapter if you travel with your hardware.">Use the same AC plugs</li>
+              <li id="ac_voltage_priority" class="ui-state-default" title="You should take care about AC voltage and frequency if you want to use your own hardware. A converter can be required.">Use the same AC voltage and frequency</li>
+              <li id="change_rate_priority" class="ui-state-default disabled">Have advantageous change rate</li>
+              <li id="fuel_priority" class="ui-state-default disabled">Sell my fuel everywhere</li>
+              <li id="cheap_priority" class="ui-state-default disabled">Is cheapest</li>
+              <li id="hot_priority" class="ui-state-default disabled">Is hottest</li>
+              <li id="no_passport_priority" class="ui-state-default disabled" title="Some countries may sign a treaty with your and allow you to cross the border without passport.">Is accessible without passport</li>
+            </ul>
+          </div>
+        </div>
+        <div id="results-tab" class="widget">
+          <p class="text-info">Fly over country name to display dialog box.</p>
+          <ul id="results"></ul>
+        </div>
+      </div>
+      <form id="settings_form" class="form-horizontal" role="form">
+        <!--<div class="form-group">
+          <label for="geochart_display_mode" title="" class="col-sm-4 control-label">Display mode</label>
+          <div class="col-sm-8"><select id="geochart_display_mode" name="geochart_display_mode" class="form-control" placeholder=".input-block-level"><option value="auto">Auto</option><option value="regions">Regions</option><option value="markers">Markers</option></select></div>
+        </div>
+        <div class="form-group">
+          <label for="geochart_resolution" title="Add borders to selected areas. Note that small resolutions are not available for each regions." class="col-sm-4 control-label">Resolution</label>
+          <div class="col-sm-8"><select id="geochart_resolution" name="geochart_resolution" class="form-control" placeholder=".input-block-level"><option value="continents">Continents</option><option value="subcontinents">Subcontinents</option><option value="countries">Countries</option><option value="provinces">Provinces</option></select></div>
+        </div>-->
+        <div class="form-group">
+          <label for="geochart_region" title="Zoom on selected region." class="col-sm-4 control-label">Focus on region</label>
+          <div class="col-sm-8"><select id="geochart_region" name="geochart_region" class="form-control" placeholder=".input-block-level"></select></div>
+        </div>
+         <button id="refresh" class="btn btn-primary btn-lg btn-block"><i class="icon-refresh icon-white"></i> Refresh map</button>
+      </form>
+    </div>
+    <div id="content" class="col-md-8">
+      <div id="geochart">
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

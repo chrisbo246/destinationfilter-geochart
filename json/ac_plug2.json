@@ -1,0 +1,34 @@
+[
+  {
+    "id":"AU",
+    "text":"Australia"
+  },
+  {
+    "id":"DK",
+    "text":"Denmark"
+  },
+  {
+    "id":"EU",
+    "text":"Europe"
+  },
+  {
+    "id":"IL",
+    "text":"Israel"
+  },
+  {
+    "id":"IT",
+    "text":"Italy"
+  },
+  {
+    "id":"ZA",
+    "text":"South Africa"
+  },
+  {
+    "id":"GB",
+    "text":"United Kingdom"
+  },
+  {
+    "id":"US",
+    "text":"USA"
+  }
+]
